@@ -9,7 +9,7 @@ function showLetter() {
 
   // Putar Audio
   if (audio) {
-    audio.currentTime = 14; 
+    audio.currentTime = 0; 
     audio.play();
   }
 
@@ -36,6 +36,7 @@ function showLetter() {
 
   typeWriter();
 }
+
 
 
 
