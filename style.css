@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: "Georgia", serif;
   background: #1e1e2f;
@@ -12,17 +13,18 @@ body {
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; /* Layar utama tidak scroll */
 }
+
 .intro {
   text-align: center;
   font-size: 1.4rem;
   margin-bottom: 30px;
-  opacity: 1;
-  transition: opacity 1s ease;
+  padding: 0 20px;
 }
+
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
   background: #f5eeef;
   border: none;
@@ -30,69 +32,100 @@ body {
   cursor: pointer;
   color: rgb(5, 2, 2);
   transition: 0.3s;
+  font-weight: bold;
 }
+
 .btn:hover {
   background: #b1acad;
 }
+
+/* --- BAGIAN KERTAS SURAT --- */
 .letter {
-  display: none;
+  display: none; /* Akan diubah jadi 'block' oleh script.js */
   background: #fdf6e3;
+  /* Garis buku */
   background-image: repeating-linear-gradient(
     to bottom,
-    #fdf6e3 0px,
-    #fdf6e3 27px,
+    transparent 0px,
+    transparent 27px,
     #d2d2d2 28px
   );
   background-attachment: local;
   color: #333;
-  padding: 40px 30px 30px 70px;
+  padding: 40px 30px 40px 60px; /* Padding disesuaikan */
   border-radius: 10px;
-  width: 85%;
+  width: 90%;
   max-width: 500px;
-  max-height: 70vh;
-  overflow-y: auto;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  
+  /* Setting Scroll */
+  height: 60vh;          /* Tinggi kertas 60% dari layar */
+  overflow-y: auto;      /* Muncul scroll jika teks panjang */
+  -webkit-overflow-scrolling: touch; /* Scroll halus di HP */
+  
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   font-size: 1.1rem;
-  line-height: 28px;
-  text-align: left;
+  line-height: 28px;     /* Pas dengan garis buku */
   position: relative;
   white-space: pre-wrap;
-  overflow-wrap: break-word;
+  word-wrap: break-word;
   font-family: "Courier New", monospace;
-  overflow: visible;
 }
+
+/* Menghapus margin yang bikin teks berantakan */
 .letter p {
   margin: 0;
+  padding: 0;
 }
+
+/* Hiasan Lubang Kertas & Garis Merah */
 .letter::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px;
+  width: 40px;
   height: 100%;
-  background-image: radial-gradient(circle, #1e1e2f 6px, transparent 7px);
+  background-image: radial-gradient(circle, #1e1e2f 5px, transparent 6px);
   background-size: 25px 40px;
   background-repeat: repeat-y;
-  background-position: center;
-  pointer-events: none;
+  background-position: center left 10px;
   border-right: 2px solid #ffadad;
+  pointer-events: none;
 }
+
 .signature {
   display: block;
-  margin-top: 20px;
-  margin-left: auto;
-  width: 150px;
-  opacity: 0.9;
-  transform: rotate(-2deg);
+  margin-top: 30px;
+  text-align: right;
+  width: 100%;
 }
+
+/* --- PENGATURAN KHUSUS HP --- */
+@media (max-width: 600px) {
+  .intro {
+    font-size: 1.1rem;
+  }
+  
+  .letter {
+    width: 92%;
+    height: 65vh; /* Sedikit lebih tinggi di HP agar lega */
+    padding: 35px 15px 35px 45px; /* Sempitkan padding di HP */
+    font-size: 1rem;
+  }
+  .letter::before {
+    width: 35px;
+    background-position: center left 5px;
+  }
+}
+/* Mempercantik Scrollbar */
 .letter::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 .letter::-webkit-scrollbar-thumb {
-  background: #d2d2d2;
+  background: #c2bdb0;
   border-radius: 10px;
 }
+
 
 
 
