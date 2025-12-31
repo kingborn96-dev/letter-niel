@@ -21,7 +21,6 @@ body {
   font-size: 1.2rem;
   margin-bottom: 20px;
   padding: 0 20px;
-  transition: opacity 1s ease;
 }
 
 .btn {
@@ -33,27 +32,37 @@ body {
   cursor: pointer;
   color: #000;
   font-weight: bold;
-  z-index: 10;
 }
 
-/* --- BAGIAN KERTAS --- */
+/* --- PERBAIKAN KERTAS --- */
 .letter {
-  display: none; /* Sembunyi sampai tombol diklik */
+  display: none;
   background: #fdf6e3;
-  color: #333 !important; /* Paksa teks jadi gelap agar terlihat */
   width: 90%;
   max-width: 500px;
-  height: 60vh; /* Tinggi tetap agar bisa di-scroll */
-  overflow-y: auto; 
+  height: 60vh;
+  overflow-y: auto;
   padding: 40px 20px 40px 60px;
   border-radius: 10px;
   position: relative;
-  line-height: 28px;
-  font-family: "Courier New", monospace;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   /* Garis buku */
   background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #d2d2d2 28px);
   background-attachment: local;
+  z-index: 1;
+}
+
+/* --- PERBAIKAN TEKS (ID ini harus sama dengan di HTML & JS) --- */
+#typedText {
+  color: #000000 !important; /* WAJIB HITAM PEKAT */
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;
+  line-height: 28px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: block !important;
+  opacity: 1 !important;
+  z-index: 2; /* Pastikan di depan kertas */
 }
 
 .letter::before {
@@ -71,21 +80,12 @@ body {
   pointer-events: none;
 }
 
-#typedText {
-  color: #333 !important;
-  white-space: pre-wrap;
-}
-
 .signature {
   display: block;
   margin-top: 30px;
   margin-left: auto;
   width: 150px;
 }
-
-/* Mempercantik Scrollbar */
-.letter::-webkit-scrollbar { width: 5px; }
-.letter::-webkit-scrollbar-thumb { background: #c2bdb0; border-radius: 10px; }
 
 
 
