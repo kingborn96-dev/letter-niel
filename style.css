@@ -9,17 +9,18 @@ body {
   background: #1e1e2f;
   color: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Ubah ke start supaya bisa scroll ke bawah */
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Gunakan min-height */
   flex-direction: column;
-  overflow: hidden;
+  padding: 40px 0; /* Kasih jarak atas bawah */
+  overflow-y: auto; /* Aktifkan scroll halaman */
 }
 
 .intro {
   text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
   padding: 0 20px;
 }
 
@@ -30,48 +31,59 @@ body {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  color: #000;
+  color: rgb(5, 2, 2);
+  transition: 0.3s;
   font-weight: bold;
 }
 
-/* --- PERBAIKAN KERTAS --- */
-.letter {
-  display: none;
-  background: #fdf6e3;
-  width: 90%;
-  max-width: 500px;
-  height: 60vh;
-  overflow-y: auto;
-  padding: 40px 20px 40px 60px;
-  border-radius: 10px;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  /* Garis buku */
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #d2d2d2 28px);
-  background-attachment: local;
-  z-index: 1;
+.btn:hover {
+  background: #b1acad;
 }
 
-/* --- PERBAIKAN TEKS (ID ini harus sama dengan di HTML & JS) --- */
-#typedText {
-  color: #000000 !important; /* WAJIB HITAM PEKAT */
-  font-family: "Courier New", monospace;
+/* --- KERTAS MEMANJANG KE BAWAH --- */
+.letter {
+  display: none; /* Akan diubah jadi 'block' oleh JS */
+  background: #fdf6e3;
+  /* Garis buku */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 27px,
+    #d2d2d2 28px
+  );
+  color: #333;
+  padding: 50px 20px 50px 60px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 550px;
+  
+  /* Ini kuncinya agar memanjang mengikuti teks: */
+  height: auto; 
+  min-height: 400px; 
+  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   font-size: 1.1rem;
   line-height: 28px;
+  position: relative;
   white-space: pre-wrap;
   word-wrap: break-word;
-  display: block !important;
-  opacity: 1 !important;
-  z-index: 2; /* Pastikan di depan kertas */
+  font-family: "Courier New", monospace;
 }
 
+/* Pastikan tidak ada margin negatif di paragraf */
+.letter p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Hiasan Lubang Kertas & Garis Merah */
 .letter::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 45px;
-  height: 100%;
+  height: 100%; /* Akan otomatis mengikuti panjang kertas */
   background-image: radial-gradient(circle, #1e1e2f 5px, transparent 6px);
   background-size: 25px 40px;
   background-repeat: repeat-y;
@@ -82,11 +94,23 @@ body {
 
 .signature {
   display: block;
-  margin-top: 30px;
-  margin-left: auto;
-  width: 150px;
+  margin-top: 40px;
+  text-align: right;
+  width: 100%;
 }
 
+/* --- RESPONSIVE HP --- */
+@media (max-width: 600px) {
+  .letter {
+    width: 95%;
+    padding: 40px 15px 40px 45px;
+    font-size: 1rem;
+  }
+  .letter::before {
+    width: 35px;
+    background-position: center left 5px;
+  }
+}
 
 
 
