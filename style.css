@@ -60,7 +60,7 @@ body {
   overflow: visible;
 }
 .letter p {
-  margin-top: -55px;
+  margin-top: 0;
   overflow: hidden;
 }
 .letter::before {
@@ -77,12 +77,13 @@ body {
   pointer-events: none;
 }
 .signature {
-  position: absolute;
-  bottom: -20px;
+  position: block;
+  bottom: 20px;
   right: 6px;
   width: 180px;
   opacity: 0.9;
   pointer-events: none;
   transform: rotate(-2deg);
 }
+
 
