@@ -9,11 +9,12 @@ body {
   background: #1e1e2f;
   color: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Ubah ke start supaya bisa scroll ke bawah */
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Gunakan min-height */
   flex-direction: column;
-  overflow: hidden; /* Layar utama tidak scroll */
+  padding: 40px 0; /* Kasih jarak atas bawah */
+  overflow-y: auto; /* Aktifkan scroll halaman */
 }
 
 .intro {
@@ -39,9 +40,9 @@ body {
   background: #b1acad;
 }
 
-/* --- BAGIAN KERTAS SURAT --- */
+/* --- KERTAS MEMANJANG KE BAWAH --- */
 .letter {
-  display: none; /* Akan diubah jadi 'block' oleh script.js */
+  display: none; /* Akan diubah jadi 'block' oleh JS */
   background: #fdf6e3;
   /* Garis buku */
   background-image: repeating-linear-gradient(
@@ -50,28 +51,26 @@ body {
     transparent 27px,
     #d2d2d2 28px
   );
-  background-attachment: local;
   color: #333;
-  padding: 40px 30px 40px 60px; /* Padding disesuaikan */
+  padding: 50px 20px 50px 60px;
   border-radius: 10px;
   width: 90%;
-  max-width: 500px;
+  max-width: 550px;
   
-  /* Setting Scroll */
-  height: 60vh;          /* Tinggi kertas 60% dari layar */
-  overflow-y: auto;      /* Muncul scroll jika teks panjang */
-  -webkit-overflow-scrolling: touch; /* Scroll halus di HP */
+  /* Ini kuncinya agar memanjang mengikuti teks: */
+  height: auto; 
+  min-height: 400px; 
   
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   font-size: 1.1rem;
-  line-height: 28px;     /* Pas dengan garis buku */
+  line-height: 28px;
   position: relative;
   white-space: pre-wrap;
   word-wrap: break-word;
   font-family: "Courier New", monospace;
 }
 
-/* Menghapus margin yang bikin teks berantakan */
+/* Pastikan tidak ada margin negatif di paragraf */
 .letter p {
   margin: 0;
   padding: 0;
@@ -83,8 +82,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 100%;
+  width: 45px;
+  height: 100%; /* Akan otomatis mengikuti panjang kertas */
   background-image: radial-gradient(circle, #1e1e2f 5px, transparent 6px);
   background-size: 25px 40px;
   background-repeat: repeat-y;
@@ -95,21 +94,16 @@ body {
 
 .signature {
   display: block;
-  margin-top: 30px;
+  margin-top: 40px;
   text-align: right;
   width: 100%;
 }
 
-/* --- PENGATURAN KHUSUS HP --- */
+/* --- RESPONSIVE HP --- */
 @media (max-width: 600px) {
-  .intro {
-    font-size: 1.1rem;
-  }
-  
   .letter {
-    width: 92%;
-    height: 65vh; /* Sedikit lebih tinggi di HP agar lega */
-    padding: 35px 15px 35px 45px; /* Sempitkan padding di HP */
+    width: 95%;
+    padding: 40px 15px 40px 45px;
     font-size: 1rem;
   }
   .letter::before {
@@ -117,14 +111,7 @@ body {
     background-position: center left 5px;
   }
 }
-/* Mempercantik Scrollbar */
-.letter::-webkit-scrollbar {
-  width: 5px;
-}
-.letter::-webkit-scrollbar-thumb {
-  background: #c2bdb0;
-  border-radius: 10px;
-}
+
 
 
 
